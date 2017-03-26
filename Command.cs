@@ -1,4 +1,6 @@
-﻿using AuthArgs = System.Tuple<string, string>;
+﻿using System;
+using AuthArgs = System.Tuple<string, string>;
+using GoodInfo = System.Tuple<string, int>;
 
 namespace ComputerStoreCore
 {
@@ -42,18 +44,18 @@ namespace ComputerStoreCore
     }
 
     // Команда добавления товара в корзину
-    public class AddToBasketCommand<T> : CommandCategoryB<T>    // TODO
+    public class AddToBasketCommand : CommandCategoryB<Tuple<GoodInfo, Basket>>
     {
-        public override void Handle(T args)
+        public override void Handle(Tuple<GoodInfo, Basket> args)
         {
             // TODO
         }
     }
 
     // Команда совершения покупки
-    public class PurchaseCommand<T> : CommandCategoryB<T>   // TODO
+    public class PurchaseCommand : CommandCategoryB<ReadOnlyBasket>
     {
-        public override void Handle(T args)
+        public override void Handle(ReadOnlyBasket args)
         {
             // TODO
         }
