@@ -2,32 +2,16 @@
 using System.Collections.Generic;
 using AuthArgs = System.Tuple<string, string>;
 using GoodInfo = System.Tuple<string, int>;
+using UserInfo = System.Tuple<string, string>;
 
 namespace ComputerStoreCore
 {
     public class Store
-    {
-        protected DiscountCard card;
-        protected int acc;
-        protected string customer;
-
+    {        
         public Dictionary<string, int> Goods { get; set; }
 
         public SortedList<int, DiscountCard> Cards { get; set; }
-
-        public DiscountCard ActiveCard
-        {
-            get { return card; }
-        }
-        public int CurrentAccumulation
-        {
-            get { return acc; }
-        }
-        public string AuthorizedCustomer
-        {
-            get { return customer; }
-        }
-
+        
         public AuthorizationCommand AuthorizationCmd
         {
             get { return AuthorizationCmd; }

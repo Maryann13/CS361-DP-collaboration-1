@@ -48,13 +48,25 @@ namespace ComputerStoreCore
     {
         public override void Handle(Tuple<GoodInfo, Basket> args)
         {
-            // TODO
+            args.Item2.Add(args.Item1);
         }
     }
 
     // Команда совершения покупки
     public class PurchaseCommand : CommandCategoryB<ReadOnlyBasket>
     {
+        protected DiscountCard card;
+        protected int acc;
+
+        public DiscountCard ActiveCard
+        {
+            get { return card; }
+        }
+        public int CurrentAccumulation
+        {
+            get { return acc; }
+        }
+
         public override void Handle(ReadOnlyBasket args)
         {
             // TODO

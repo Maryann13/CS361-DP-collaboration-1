@@ -11,6 +11,7 @@ C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.Proper
 C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\ComputerStoreInterface.csproj.GenerateResource.Cache
 C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.exe
 C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.pdb
+<<<<<<< HEAD
 C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\ComputerStoreInterface.csprojResolveAssemblyReference.cache
 C:\Users\Anne\Documents\Visual Studio 2015\Projects\ComputerStoreCore\ComputerStore\CS361-DP-collaboration-1\Interface\bin\Debug\Shop.exe.config
 C:\Users\Anne\Documents\Visual Studio 2015\Projects\ComputerStoreCore\ComputerStore\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.exe
@@ -26,3 +27,5 @@ C:\Users\Anne\Documents\Visual Studio 2015\Projects\ComputerStoreCore\ComputerSt
 C:\Users\Anne\Documents\Visual Studio 2015\Projects\ComputerStoreCore\ComputerStore\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.g.resources
 C:\Users\Anne\Documents\Visual Studio 2015\Projects\ComputerStoreCore\ComputerStore\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.Properties.Resources.resources
 C:\Users\Anne\Documents\Visual Studio 2015\Projects\ComputerStoreCore\ComputerStore\CS361-DP-collaboration-1\Interface\obj\Debug\ComputerStoreInterface.csproj.GenerateResource.Cache
+=======
+>>>>>>> aa86d116002e331287dbe8d37bdbf06c9dbe5718
