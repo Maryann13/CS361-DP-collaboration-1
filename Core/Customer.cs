@@ -36,9 +36,12 @@ namespace ComputerStoreCore
         }
     }
 
+    // Покупатель — реализует паттерн «Одиночка»
     public class Customer
     {
-        private Basket basket;
+        protected static Customer instance;
+
+        protected Basket basket;
 
         public string Name { get; }
 
@@ -52,10 +55,17 @@ namespace ComputerStoreCore
             get { return basket; }
         }
 
-        public Customer(string name)
+        protected Customer(string name)
         {
             basket = new Basket();
             Name = name;
+        }
+
+        public static Customer Instance(string name)
+        {
+            if (instance == null)
+                instance = new Customer(name);
+            return instance;
         }
     }
 }

@@ -38,6 +38,6 @@ namespace ComputerStoreCore
         public virtual Basket MakeBasket()
             { return new Basket(); }
         public virtual Customer MakeCustomer(string name)
-            { return new Customer(name); }
+            { return Customer.Instance(name); }
     }
 }

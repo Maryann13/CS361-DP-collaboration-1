@@ -7,9 +7,9 @@ namespace ComputerStoreCore
 {
     public class Store
     {
-        private DiscountCard card;
-        private int acc;
-        private string customer;
+        protected DiscountCard card;
+        protected int acc;
+        protected string customer;
 
         public Dictionary<string, int> Goods { get; set; }
 
