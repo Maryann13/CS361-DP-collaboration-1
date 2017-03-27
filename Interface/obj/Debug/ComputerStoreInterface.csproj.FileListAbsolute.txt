@@ -1,0 +1,14 @@
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\bin\Debug\Shop.exe.config
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\bin\Debug\Shop.exe
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\bin\Debug\Shop.pdb
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\MainWindow.baml
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\MainWindow.g.cs
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\App.g.cs
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop_MarkupCompile.cache
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop_MarkupCompile.lref
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.g.resources
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.Properties.Resources.resources
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\ComputerStoreInterface.csproj.GenerateResource.Cache
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.exe
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.pdb
+C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\ComputerStoreInterface.csprojResolveAssemblyReference.cache
