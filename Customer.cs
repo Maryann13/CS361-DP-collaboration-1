@@ -52,9 +52,10 @@ namespace ComputerStoreCore
             get { return basket; }
         }
 
-        public Customer()
+        public Customer(string name)
         {
             basket = new Basket();
+            Name = name;
         }
     }
 }
