@@ -11,4 +11,3 @@ C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.Proper
 C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\ComputerStoreInterface.csproj.GenerateResource.Cache
 C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.exe
 C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.pdb
-C:\Programming\Patterns\CS361-DP-collaboration-1\Interface\obj\Debug\ComputerStoreInterface.csprojResolveAssemblyReference.cache
