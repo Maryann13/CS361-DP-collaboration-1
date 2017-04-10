@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using AuthArgs = System.Tuple<string, string>;
 using GoodInfo = System.Tuple<string, int>;
-using UserInfo = System.Tuple<string, string>;
 
 namespace ComputerStoreCore
 {
@@ -10,13 +9,33 @@ namespace ComputerStoreCore
     {        
         public Dictionary<string, int> Goods { get; set; }
 
-        public SortedList<int, DiscountCard> Cards { get; set; }
-        
+        public SortedList<int, DiscountCard> Cards
+        {
+            get { return PurchaseCmd.Cards; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException();
+                PurchaseCmd.Cards = value;
+            }
+        }
+
+        public DiscountCard ActiveCard
+        {
+            get { return PurchaseCmd.ActiveCard; }
+        }
+        public int CurrentAccumulation
+        {
+            get { return PurchaseCmd.CurrentAccumulation; }
+        }
+
         public AuthorizationCommand AuthorizationCmd
         {
             get { return AuthorizationCmd; }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException();
                 AuthorizationCmd = value;
                 Authorization = AuthorizationCmd.Handle;
             }
@@ -26,6 +45,8 @@ namespace ComputerStoreCore
             get { return RegistrationCmd; }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException();
                 RegistrationCmd = value;
                 Registration = RegistrationCmd.Handle;
             }
@@ -35,6 +56,8 @@ namespace ComputerStoreCore
             get { return AddToBasketCmd; }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException();
                 AddToBasketCmd = value;
                 AddToBasket = AddToBasketCmd.Handle;
             }
@@ -44,6 +67,8 @@ namespace ComputerStoreCore
             get { return PurchaseCmd; }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException();
                 PurchaseCmd = value;
                 Purchase = PurchaseCmd.Handle;
             }
@@ -53,6 +78,8 @@ namespace ComputerStoreCore
             get { return LogOutCmd; }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException();
                 LogOutCmd = value;
                 LogOut = LogOutCmd.Handle;
             }
@@ -62,16 +89,18 @@ namespace ComputerStoreCore
             get { return QuitCmd; }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException();
                 QuitCmd = value;
                 Quit = QuitCmd.Handle;
             }
         }        
 
-        public event CommandHandler<AuthArgs> Authorization;
-        public event CommandHandler<AuthArgs> Registration;
-        public event CommandHandler<Tuple<GoodInfo, Basket>> AddToBasket;
-        public event CommandHandler<ReadOnlyBasket> Purchase;
-        public event CommandHandler<Void> LogOut;
-        public event CommandHandler<Void> Quit;
+        public event CommandHandler<AuthArgs, Customer> Authorization;
+        public event CommandHandler<AuthArgs, Customer> Registration;
+        public event CommandHandler<Tuple<GoodInfo, Basket>, Void> AddToBasket;
+        public event CommandHandler<ReadOnlyBasket, Void> Purchase;
+        public event CommandHandler<Customer, Void> LogOut;
+        public event CommandHandler<Void, Void> Quit;
     }    
 }

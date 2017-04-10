@@ -6,7 +6,7 @@ namespace ComputerStoreCore
     {
         void BuildStore(StoreFactory factory);
         void BuildCards(DiscountCardsFactory factory);
-        void BuildCommands(StoreFactory factory);
+        void BuildCommands(StoreFactory factory, CustomerFactory custFactory);
         Store GetStore();
     }
 
@@ -31,10 +31,10 @@ namespace ComputerStoreCore
             store.Cards.Add(integrated.Accumulation, integrated);
         }
 
-        public void BuildCommands(StoreFactory factory)
+        public void BuildCommands(StoreFactory factory, CustomerFactory custFactory)
         {
-            store.AuthorizationCmd = factory.MakeAuthorizationCommand();
-            store.RegistrationCmd = factory.MakeRegistrationCommand();
+            store.AuthorizationCmd = factory.MakeAuthorizationCommand(custFactory);
+            store.RegistrationCmd = factory.MakeRegistrationCommand(custFactory);
             store.AddToBasketCmd = factory.MakeAddToBasketCommand();
             store.PurchaseCmd = factory.MakePurchaseCommand();
             store.LogOutCmd = factory.MakeLogOutCommand();

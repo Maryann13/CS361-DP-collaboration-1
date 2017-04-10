@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GoodInfo = System.Tuple<string, int>;
 
 namespace ComputerStoreCore
@@ -10,6 +11,11 @@ namespace ComputerStoreCore
         public GoodInfo this[int i]
         {
             get { return goods[i]; }
+        }
+
+        public int Count
+        {
+            get { return goods.Count; }
         }
 
         public ReadOnlyBasket()
@@ -43,7 +49,17 @@ namespace ComputerStoreCore
 
         protected Basket basket;
 
-        public string Name { get; }
+        protected string name, username;
+
+        public string Name
+        {
+            get { return name; }
+        }
+
+        public string Username
+        {
+            get { return username; }
+        }
 
         public ReadOnlyBasket GoodsBasketReadOnly
         {
@@ -55,16 +71,31 @@ namespace ComputerStoreCore
             get { return basket; }
         }
 
-        protected Customer(string name)
+        protected Customer(string name, string username)
         {
+            if (name == null || username == null)
+                throw new ArgumentNullException();
+            if (name == "" || username == "")
+                throw new ArgumentException();
+
             basket = new Basket();
-            Name = name;
+            this.name = name;
+            this.username = username;
         }
 
-        public static Customer Instance(string name)
+        public void LogOut()
+        {
+            instance = null;
+
+            basket = null;
+            name = null;
+            username = null;
+        }
+
+        public static Customer Instance(string name, string username)
         {
             if (instance == null)
-                instance = new Customer(name);
+                instance = new Customer(name, username);
             return instance;
         }
     }
