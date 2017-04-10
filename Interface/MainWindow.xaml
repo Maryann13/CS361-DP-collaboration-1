@@ -28,18 +28,19 @@
 
         <Grid Grid.Row="1" Grid.Column ="0" Width="150">
             <Button x:Name="log_in" Width="70" Content="Log In" Margin="40,10,40,0" VerticalAlignment="Top" Click="log_in_Click"/>
-            <Button x:Name="register" Width="70" Content="Register" HorizontalAlignment="Left" Margin="40,35,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="add" Content="Add" HorizontalAlignment="Left" Margin="40,331,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
-            <Button x:Name="buy" Content="Buy" HorizontalAlignment="Left" Margin="40,356,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
-            <Button x:Name="log_out" Content="Log Out" HorizontalAlignment="Left" Margin="40,381,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
+            <Button x:Name="register" Width="70" Content="Register" HorizontalAlignment="Left" Margin="40,35,0,0" VerticalAlignment="Top" Click="register_Click"/>
+            <Button x:Name="add" Content="Add" HorizontalAlignment="Left" Margin="40,331,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="add_Click"/>
+            <Button x:Name="buy" Content="Buy" HorizontalAlignment="Left" Margin="40,356,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="buy_Click"/>
+            <Button x:Name="log_out" Content="Log Out" HorizontalAlignment="Left" Margin="40,381,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="log_out_Click"/>
         </Grid>
 
         <StackPanel x:Name="center" Grid.Row="1" Grid.Column ="1">
             <ScrollViewer>
-                <TextBlock x:Name="interpreter" Height="200"  Text="Welcome to shop!" Background="White" FontStyle="Italic" FontSize="15" Foreground="Black"/>
+                <TextBlock x:Name="interpreter" Height="280"  Text="Welcome to shop!" Background="White" FontStyle="Italic" FontSize="15" Foreground="Black"/>
             </ScrollViewer>
-            <TextBox x:Name="nick" Margin="5" IsEnabled="False"></TextBox>
-            <TextBox x:Name="pass" Margin="5" IsEnabled="False"></TextBox>
+            <TextBox x:Name="name" Margin="5" IsEnabled="False" Text="Name"></TextBox>
+            <TextBox x:Name="nick" Margin="5" IsEnabled="False" Text="Nickname"></TextBox>
+            <PasswordBox x:Name="pass" Margin="5" IsEnabled="False" PasswordChar="*"></PasswordBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="ok" Width="70" Margin="5" Content="Ok" Height="20" IsEnabled="False" Click="ok_Click"></Button>
                 <Button x:Name="clear" Width="70" Margin="5" Content="Clear" Height="20" IsEnabled="False" Click="clear_Click"></Button>
@@ -48,7 +49,7 @@
 
         <StackPanel Grid.Row="1" Grid.Column ="2">
             <Label Content="Goods" HorizontalContentAlignment="Center"></Label>
-            <ListBox></ListBox>
+            <ListBox x:Name="goods" Margin="5"></ListBox>
         </StackPanel>
         
     </Grid>

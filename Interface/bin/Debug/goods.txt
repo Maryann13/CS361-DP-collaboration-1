@@ -1,0 +1,9 @@
+intel_core_i3 500
+intel_core_i5 700
+intel_core_i7 1200
+intel_core_2_duo 300
+amd_fx_6300 330
+amd_fx_8300 400
+amd_r7_260x 500
+amd_r4 200
+amd_r7_290 800
