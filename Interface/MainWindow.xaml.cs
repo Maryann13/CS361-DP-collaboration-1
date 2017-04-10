@@ -13,7 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using ComputerStoreCore;
+using CSCVoid = ComputerStoreCore.Void;
 
 namespace Shop
 {
@@ -22,7 +23,6 @@ namespace Shop
     /// </summary>
     public partial class MainWindow : Window
     {
-
         private bool in_log = false;
 
         private string curr_comand;
@@ -31,9 +31,29 @@ namespace Shop
 
         private string goods_file = "./goods.txt";
 
+        private Store store;
+
+        private Customer customer;
+
+        private CSCVoid voidOut;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            StoreSystem storeSystem = new StoreSystem();
+
+            StoreFactory sFactory = new StoreFactory();
+            DiscountCardsFactory dcFactory = new DiscountCardsFactory();
+            CustomerFactory cFactory = new CustomerFactory();
+
+            StandardStoreBuilder storeBuilder = new StandardStoreBuilder();
+
+            store = storeSystem.CreateStore
+                    (storeBuilder, sFactory, dcFactory, cFactory);
         }
 
         private Dictionary<string, int> goods_parse()
@@ -43,7 +63,8 @@ namespace Shop
                 new List<string>(File.ReadAllLines(goods_file).Select((s) => s.Split(' ')[0])).ToList();
 
             List<int> prices =
-                new List<int>(File.ReadAllLines(goods_file).Select<string, int>((s) => int.Parse(s.Split(' ')[1]))).ToList();
+                new List<int>(File.ReadAllLines(goods_file).Select<string, int>
+                                        ((s) => int.Parse(s.Split(' ')[1]))).ToList();
 
             Dictionary<string, int> res = new Dictionary<string, int>();
 
@@ -58,20 +79,25 @@ namespace Shop
         {
 
             List<string> names =
-                            new List<string>(File.ReadAllLines(users_file).Select((s) => s.Split(' ')[0])).ToList();
+                    new List<string>(File.ReadAllLines(users_file).Select
+                            ((s) => s.Split(' ')[0])).ToList();
 
             List<string> nicks =
-                           new List<string>(File.ReadAllLines(users_file).Select((s) => s.Split(' ')[1])).ToList();
+                    new List<string>(File.ReadAllLines(users_file).Select
+                            ((s) => s.Split(' ')[1])).ToList();
 
             List<string> pass =
-                           new List<string>(File.ReadAllLines(users_file).Select((s) => s.Split(' ')[2])).ToList();
+                    new List<string>(File.ReadAllLines(users_file).Select
+                            ((s) => s.Split(' ')[2])).ToList();
 
             List<int> acc = 
-                        new List<int>(File.ReadAllLines(users_file).Select<string, int>((s) => int.Parse(s.Split(' ')[3]))).ToList();
+                    new List<int>(File.ReadAllLines(users_file).Select<string, int>
+                            ((s) => int.Parse(s.Split(' ')[3]))).ToList();
 
 
 
-            Dictionary<string, Tuple<string, string, int>> res = new Dictionary<string, Tuple<string, string, int>>();
+            Dictionary<string, Tuple<string, string, int>> res =
+                        new Dictionary<string, Tuple<string, string, int>>();
 
             for (int i = 0; i < nicks.Count; i++)
             {
@@ -219,6 +245,8 @@ namespace Shop
             add.IsEnabled = false;
             buy.IsEnabled = false;
             log_out.IsEnabled = false;
-        }
+
+            store.OnLogOut(customer, out voidOut);
+        }        
     }
 }

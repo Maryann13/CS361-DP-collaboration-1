@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shop"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="Shop" Height="480" Width="640" Background="Bisque" ResizeMode="CanMinimize">
     <Grid Margin="5">
         <Grid.RowDefinitions>

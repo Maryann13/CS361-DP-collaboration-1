@@ -119,5 +119,47 @@ namespace ComputerStoreCore
         public event CommandHandler<Customer, Void> LogOut;
         // Событие выключения системы
         public event CommandHandler<Customer, Void> Quit;
+
+        // Обработчик авторизации
+        public void OnAuthorization(AuthArgs args, out Customer c)
+        {
+            c = null;
+            Authorization?.Invoke(args, out c);
+        }
+
+        // Обработчик регистрации
+        public void OnRegistration(AuthArgs args, out Customer c)
+        {
+            c = null;
+            Registration?.Invoke(args, out c);
+        }
+
+        // Обработчик добавления товара в корзину
+        public void OnAddToBasket(Tuple<GoodInfo, Basket> args, out Void v)
+        {
+            v = null;
+            AddToBasket?.Invoke(args, out v);
+        }
+
+        // Обработчик совершения покупки
+        public void OnPurchase(ReadOnlyBasket basket, out Void v)
+        {
+            v = null;
+            Purchase?.Invoke(basket, out v);
+        }
+
+        // Обработчик завершения сеанса работы
+        public void OnLogOut(Customer c, out Void v)
+        {
+            v = null;
+            LogOut?.Invoke(c, out v);
+        }
+
+        // Обработчик выключения системы
+        public void OnQuit(Customer c, out Void v)
+        {
+            v = null;
+            Quit?.Invoke(c, out v);
+        }
     }    
 }
