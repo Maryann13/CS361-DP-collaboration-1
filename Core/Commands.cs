@@ -81,18 +81,19 @@ namespace ComputerStoreCore
     // Команда совершения покупки
     public class PurchaseCommand : CommandCategoryB<ReadOnlyBasket, Void>
     {
+        protected SortedList<int, DiscountCard> cards;
         protected DiscountCard card;
         protected int acc, nextAcc;
 
         // Скидочные карты
         public SortedList<int, DiscountCard> Cards
         {
-            get { return Cards; }
+            get { return cards; }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException();
-                Cards = value;
+                cards = value;
             }
         }
 
@@ -109,9 +110,11 @@ namespace ComputerStoreCore
 
         public PurchaseCommand()
         {
+            cards = new SortedList<int, DiscountCard>();
+
             card = null;
             acc = 0;
-            nextAcc = Cards.Keys[0];
+            nextAcc = 0;
         }
 
         // Обработчик команды
@@ -120,6 +123,8 @@ namespace ComputerStoreCore
             for (int i = 0; i < basket.Count; ++i)
                 acc += basket[i].Item2;
 
+            if (nextAcc == 0)
+                nextAcc = Cards.Keys[0];
             if (acc >= nextAcc)
             {
                 card = Cards[nextAcc];

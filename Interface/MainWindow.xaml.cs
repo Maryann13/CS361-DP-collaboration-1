@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Resources;
 using System.Windows.Shapes;
 using ComputerStoreCore;
 using CSCVoid = ComputerStoreCore.Void;
@@ -40,6 +41,12 @@ namespace Shop
         public MainWindow()
         {
             InitializeComponent();
+            Uri resourceUri = new Uri("img/shoppingcart_2.png", UriKind.Relative);
+            StreamResourceInfo streamInfo = Application.GetResourceStream(resourceUri);
+            BitmapFrame temp = BitmapFrame.Create(streamInfo.Stream);
+            var brush = new ImageBrush();
+            brush.ImageSource = temp;
+            shopingcart.Background = brush;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -94,8 +101,6 @@ namespace Shop
                     new List<int>(File.ReadAllLines(users_file).Select<string, int>
                             ((s) => int.Parse(s.Split(' ')[3]))).ToList();
 
-
-
             Dictionary<string, Tuple<string, string, int>> res =
                         new Dictionary<string, Tuple<string, string, int>>();
 
@@ -122,6 +127,16 @@ namespace Shop
             }
         }
 
+        private void console_print(string s)
+        {
+            interpreter.Text += Environment.NewLine + s;
+        }
+
+        private void console_print(IEnumerable<string> ss)
+        {
+            foreach(string s in ss)
+                interpreter.Text += Environment.NewLine + s;
+        }
 
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
@@ -179,7 +194,7 @@ namespace Shop
                 add.IsEnabled = true;
                 buy.IsEnabled = true;
                 log_out.IsEnabled = true;
-                interpreter.Text += "\n" + "Hi, " + curr_name;
+                console_print("Hi, " + curr_name);
                 name.Text = curr_name;
                 goods.ItemsSource = new List<string>(goods_parse().Keys);
                 //todo
@@ -189,7 +204,7 @@ namespace Shop
                 name.Text = "Name";
                 nick.Clear();
                 pass.Clear();
-                interpreter.Text += "\n" + "Try Agane!";
+                console_print("Try Agane!");
             }
         }
 
@@ -248,5 +263,14 @@ namespace Shop
 
             store.OnLogOut(customer, out voidOut);
         }        
+
+        private void shopingcart_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> basket = new List<string>();
+            basket.Add("lol");
+            basket.Add("kek");
+            basket.Add("azaza");
+            console_print(basket);
+        }
     }
 }

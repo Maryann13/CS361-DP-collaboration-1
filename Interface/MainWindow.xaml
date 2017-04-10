@@ -51,6 +51,7 @@
         <StackPanel Grid.Row="1" Grid.Column ="2">
             <Label Content="Goods" HorizontalContentAlignment="Center"></Label>
             <ListBox x:Name="goods" Margin="5"></ListBox>
+            <Button x:Name="shopingcart" Height="40" Width="40" Click="shopingcart_Click"></Button>
         </StackPanel>
         
     </Grid>

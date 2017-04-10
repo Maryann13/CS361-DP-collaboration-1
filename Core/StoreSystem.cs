@@ -9,8 +9,8 @@ namespace ComputerStoreCore
              DiscountCardsFactory cardsFactory, CustomerFactory custFactory)
         {
             builder.BuildStore(storeFactory);
-            builder.BuildCards(cardsFactory);
             builder.BuildCommands(storeFactory, custFactory);
+            builder.BuildCards(cardsFactory);            
             return builder.GetStore();
         }
 

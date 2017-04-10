@@ -37,73 +37,73 @@ namespace ComputerStoreCore
         // Команда авторизации
         public AuthorizationCommand AuthorizationCmd
         {
-            get { return AuthorizationCmd; }
+            get { return authCmd; }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException();
-                AuthorizationCmd = value;
-                Authorization = AuthorizationCmd.Handle;
+                authCmd = value;
+                Authorization = authCmd.Handle;
             }
         }
         // Команда регистрации
         public RegistrationCommand RegistrationCmd
         {
-            get { return RegistrationCmd; }
+            get { return regCmd; }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException();
-                RegistrationCmd = value;
-                Registration = RegistrationCmd.Handle;
+                regCmd = value;
+                Registration = regCmd.Handle;
             }
         }
         // Команда добавления товара в корзину
         public AddToBasketCommand AddToBasketCmd
         {
-            get { return AddToBasketCmd; }
+            get { return addToBasketCmd; }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException();
-                AddToBasketCmd = value;
-                AddToBasket = AddToBasketCmd.Handle;
+                addToBasketCmd = value;
+                AddToBasket = addToBasketCmd.Handle;
             }
         }
         // Команда совершения покупки
         public PurchaseCommand PurchaseCmd
         {
-            get { return PurchaseCmd; }
+            get { return purchaseCmd; }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException();
-                PurchaseCmd = value;
-                Purchase = PurchaseCmd.Handle;
+                purchaseCmd = value;
+                Purchase = purchaseCmd.Handle;
             }
         }
         // Команда завершения сеанса работы
         public LogOutCommand LogOutCmd
         {
-            get { return LogOutCmd; }
+            get { return logOutCmd; }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException();
-                LogOutCmd = value;
-                LogOut = LogOutCmd.Handle;
+                logOutCmd = value;
+                LogOut = logOutCmd.Handle;
             }
         }
         // Команда выключения системы
         public QuitCommand QuitCmd
         {
-            get { return QuitCmd; }
+            get { return quitCmd; }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException();
-                QuitCmd = value;
-                Quit = QuitCmd.Handle;
+                quitCmd = value;
+                Quit = quitCmd.Handle;
             }
         }
 
@@ -119,6 +119,13 @@ namespace ComputerStoreCore
         public event CommandHandler<Customer, Void> LogOut;
         // Событие выключения системы
         public event CommandHandler<Customer, Void> Quit;
+
+        protected AuthorizationCommand authCmd;
+        protected RegistrationCommand regCmd;
+        protected AddToBasketCommand addToBasketCmd;
+        protected PurchaseCommand purchaseCmd;
+        protected LogOutCommand logOutCmd;
+        protected QuitCommand quitCmd;
 
         // Обработчик авторизации
         public void OnAuthorization(AuthArgs args, out Customer c)
