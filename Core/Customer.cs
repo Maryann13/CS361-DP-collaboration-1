@@ -4,6 +4,7 @@ using GoodInfo = System.Tuple<string, int>;
 
 namespace ComputerStoreCore
 {
+    // Корзина только на чтение
     public class ReadOnlyBasket
     {
         protected List<GoodInfo> goods;
@@ -18,19 +19,28 @@ namespace ComputerStoreCore
             get { return goods.Count; }
         }
 
-        public ReadOnlyBasket()
+        protected ReadOnlyBasket()
         {
             goods = new List<GoodInfo>();
         }
 
-        public ReadOnlyBasket(IEnumerable<GoodInfo> goods)
+        protected ReadOnlyBasket(IEnumerable<GoodInfo> goods)
         {
             goods = new List<GoodInfo>(goods);
         }
+
+        protected static ReadOnlyBasket MakeReadOnlyBasket
+                                (IEnumerable<GoodInfo> goods)
+        {
+            return new ReadOnlyBasket(goods);
+        }
     }
 
+    // Корзина — реализует паттерн «Одиночка»
     public class Basket : ReadOnlyBasket
     {
+        protected static Basket instance;
+
         public void Add(GoodInfo good)
         {
             goods.Add(good);
@@ -38,7 +48,16 @@ namespace ComputerStoreCore
 
         public ReadOnlyBasket ToReadOnly()
         {
-            return new ReadOnlyBasket(goods);
+            return ReadOnlyBasket.MakeReadOnlyBasket(goods);
+        }
+
+        protected Basket() : base() { }
+
+        public static Basket Instance()
+        {
+            if (instance == null)
+                instance = new Basket();
+            return instance;
         }
     }
 
@@ -78,7 +97,7 @@ namespace ComputerStoreCore
             if (name == "" || username == "")
                 throw new ArgumentException();
 
-            basket = new Basket();
+            basket = Basket.Instance();
             this.name = name;
             this.username = username;
         }

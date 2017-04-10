@@ -34,9 +34,7 @@ namespace ComputerStoreCore
 
     // Реализует паттерн «Абстрактная фабрика» для покупателя
     public class CustomerFactory
-    {
-        public virtual Basket MakeBasket()
-            { return new Basket(); }
+    {       
         public virtual Customer MakeCustomer(string name, string username)
             { return Customer.Instance(name, username); }
     }

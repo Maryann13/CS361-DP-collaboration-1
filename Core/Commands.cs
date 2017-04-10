@@ -12,12 +12,14 @@ namespace ComputerStoreCore
     // Поддерживает обработку команды
     public interface IHandleable<T, Out>
     {
+        // Обработчик команды
         void Handle(T args, out Out o);
     }
 
     // Команда
     public abstract class Command<T, Out> : IHandleable<T, Out>
     {
+        // Обработчик команды
         public abstract void Handle(T args, out Out o);
     }
 
@@ -39,6 +41,7 @@ namespace ComputerStoreCore
             this.factory = factory;
         }
 
+        // Обработчик команды
         public override void Handle(AuthArgs args, out Customer c)
         {
             c = factory.MakeCustomer(args.Item1, args.Item2);
@@ -57,6 +60,7 @@ namespace ComputerStoreCore
             this.factory = factory;
         }
 
+        // Обработчик команды
         public override void Handle(AuthArgs args, out Customer c)
         {
             c = factory.MakeCustomer(args.Item1, args.Item2);
@@ -66,6 +70,7 @@ namespace ComputerStoreCore
     // Команда добавления товара в корзину
     public class AddToBasketCommand : CommandCategoryB<Tuple<GoodInfo, Basket>, Void>
     {
+        // Обработчик команды
         public override void Handle(Tuple<GoodInfo, Basket> args, out Void v)
         {
             args.Item2.Add(args.Item1);
@@ -79,6 +84,7 @@ namespace ComputerStoreCore
         protected DiscountCard card;
         protected int acc, nextAcc;
 
+        // Скидочные карты
         public SortedList<int, DiscountCard> Cards
         {
             get { return Cards; }
@@ -90,10 +96,12 @@ namespace ComputerStoreCore
             }
         }
 
+        // Активная карта
         public DiscountCard ActiveCard
         {
             get { return card; }
         }
+        // Текущее накопление
         public int CurrentAccumulation
         {
             get { return acc; }
@@ -106,6 +114,7 @@ namespace ComputerStoreCore
             nextAcc = Cards.Keys[0];
         }
 
+        // Обработчик команды
         public override void Handle(ReadOnlyBasket basket, out Void v)
         {
             for (int i = 0; i < basket.Count; ++i)
@@ -128,6 +137,7 @@ namespace ComputerStoreCore
     // Команда завершения сеанса работы
     public class LogOutCommand : CommandCategoryB<Customer, Void>
     {
+        // Обработчик команды
         public override void Handle(Customer c, out Void v)
         {
             c.LogOut();
@@ -136,10 +146,12 @@ namespace ComputerStoreCore
     }
 
     // Команда выключения системы
-    public class QuitCommand : Command<Void, Void>
+    public class QuitCommand : Command<Customer, Void>
     {
-        public override void Handle(Void args, out Void v)
-        {           
+        // Обработчик команды
+        public override void Handle(Customer c, out Void v)
+        {
+            c.LogOut();
             v = null;
         }
     }

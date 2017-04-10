@@ -5,10 +5,13 @@ using GoodInfo = System.Tuple<string, int>;
 
 namespace ComputerStoreCore
 {
+    // Магазин
     public class Store
-    {        
+    {
+        // Товары
         public Dictionary<string, int> Goods { get; set; }
 
+        // Скидочные карты
         public SortedList<int, DiscountCard> Cards
         {
             get { return PurchaseCmd.Cards; }
@@ -20,15 +23,18 @@ namespace ComputerStoreCore
             }
         }
 
+        // Активная карта
         public DiscountCard ActiveCard
         {
             get { return PurchaseCmd.ActiveCard; }
         }
+        // Текущее накопление
         public int CurrentAccumulation
         {
             get { return PurchaseCmd.CurrentAccumulation; }
         }
 
+        // Команда авторизации
         public AuthorizationCommand AuthorizationCmd
         {
             get { return AuthorizationCmd; }
@@ -40,6 +46,7 @@ namespace ComputerStoreCore
                 Authorization = AuthorizationCmd.Handle;
             }
         }
+        // Команда регистрации
         public RegistrationCommand RegistrationCmd
         {
             get { return RegistrationCmd; }
@@ -51,6 +58,7 @@ namespace ComputerStoreCore
                 Registration = RegistrationCmd.Handle;
             }
         }
+        // Команда добавления товара в корзину
         public AddToBasketCommand AddToBasketCmd
         {
             get { return AddToBasketCmd; }
@@ -62,6 +70,7 @@ namespace ComputerStoreCore
                 AddToBasket = AddToBasketCmd.Handle;
             }
         }
+        // Команда совершения покупки
         public PurchaseCommand PurchaseCmd
         {
             get { return PurchaseCmd; }
@@ -73,6 +82,7 @@ namespace ComputerStoreCore
                 Purchase = PurchaseCmd.Handle;
             }
         }
+        // Команда завершения сеанса работы
         public LogOutCommand LogOutCmd
         {
             get { return LogOutCmd; }
@@ -84,6 +94,7 @@ namespace ComputerStoreCore
                 LogOut = LogOutCmd.Handle;
             }
         }
+        // Команда выключения системы
         public QuitCommand QuitCmd
         {
             get { return QuitCmd; }
@@ -94,13 +105,19 @@ namespace ComputerStoreCore
                 QuitCmd = value;
                 Quit = QuitCmd.Handle;
             }
-        }        
+        }
 
+        // Событие авторизации
         public event CommandHandler<AuthArgs, Customer> Authorization;
+        // Событие регистрации
         public event CommandHandler<AuthArgs, Customer> Registration;
+        // Событие добавления товара в корзину
         public event CommandHandler<Tuple<GoodInfo, Basket>, Void> AddToBasket;
+        // Событие совершения покупки
         public event CommandHandler<ReadOnlyBasket, Void> Purchase;
+        // Событие завершения сеанса работы
         public event CommandHandler<Customer, Void> LogOut;
-        public event CommandHandler<Void, Void> Quit;
+        // Событие выключения системы
+        public event CommandHandler<Customer, Void> Quit;
     }    
 }
