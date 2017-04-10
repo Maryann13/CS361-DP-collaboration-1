@@ -18,10 +18,10 @@ namespace ComputerStoreCore
         public virtual Store MakeStore()
             { return new Store(); }
         
-        public virtual AuthorizationCommand MakeAuthorizationCommand()
-            { return new AuthorizationCommand(); }
-        public virtual RegistrationCommand MakeRegistrationCommand()
-            { return new RegistrationCommand(); }
+        public virtual AuthorizationCommand MakeAuthorizationCommand(CustomerFactory factory)
+            { return new AuthorizationCommand(factory); }
+        public virtual RegistrationCommand MakeRegistrationCommand(CustomerFactory factory)
+            { return new RegistrationCommand(factory); }
         public virtual AddToBasketCommand MakeAddToBasketCommand()
             { return new AddToBasketCommand(); }
         public virtual PurchaseCommand MakePurchaseCommand()
@@ -34,10 +34,8 @@ namespace ComputerStoreCore
 
     // Реализует паттерн «Абстрактная фабрика» для покупателя
     public class CustomerFactory
-    {
-        public virtual Basket MakeBasket()
-            { return new Basket(); }
-        public virtual Customer MakeCustomer(string name)
-            { return Customer.Instance(name); }
+    {       
+        public virtual Customer MakeCustomer(string name, string username)
+            { return Customer.Instance(name, username); }
     }
 }
