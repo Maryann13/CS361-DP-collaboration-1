@@ -119,6 +119,7 @@ namespace Shop
 
         private void add_user(string name, string nick, string pass)
         {
+            
             using (StreamWriter sw = File.AppendText(users_file))
             {
                 sw.Write(Environment.NewLine + name + " " + nick + " " + pass + " 0");
@@ -127,6 +128,9 @@ namespace Shop
 
         private void add_good(string name, int price)
         {
+            var f = File.ReadAllLines(users_file);
+            f = f.Where(val => val != "").ToArray();
+            File.WriteAllLines(users_file, f);
             using (StreamWriter sw = File.AppendText(goods_file))
             {
                 sw.Write(Environment.NewLine + name + " " +price.ToString());
@@ -189,6 +193,14 @@ namespace Shop
                         log_in_Click(null, null);
                         nick.Text = command[1];
                         pass.Password = command[2];
+                        ok_Click(null, null);
+                        break;
+
+                    case "register":
+                        register_Click(null, null);
+                        name.Text = command[1];
+                        nick.Text = command[2];
+                        pass.Password = command[3];
                         ok_Click(null, null);
                         break;
 
@@ -288,7 +300,6 @@ namespace Shop
                 console_print("Hi, " + curr_name);
                 name.Text = curr_name;
                 goods.ItemsSource = new List<string>(File.ReadAllLines(goods_file));
-
                 if (curr_command == "log_in")
                     store.OnAuthorization(Tuple.Create(curr_name, curr_nick), out customer);
                 else
@@ -387,9 +398,12 @@ namespace Shop
             var f = File.ReadAllLines(users_file);
             for (var i = 0; i < f.Length; i++) 
             {
-                if(f[i].Split(' ')[1] == nick)
+                if (f[i] != "")
                 {
-                    f[i] = f[i].Split(' ')[0] + " " + f[i].Split(' ')[1] + " " + f[i].Split(' ')[2] + " " + (int.Parse(f[i].Split(' ')[3]) + store.CurrentAccumulation).ToString();
+                    if (f[i].Split(' ')[1] == nick)
+                    {
+                        f[i] = f[i].Split(' ')[0] + " " + f[i].Split(' ')[1] + " " + f[i].Split(' ')[2] + " " + (int.Parse(f[i].Split(' ')[3]) + store.CurrentAccumulation).ToString();
+                    }
                 }
             }
             File.WriteAllLines(users_file, f);
