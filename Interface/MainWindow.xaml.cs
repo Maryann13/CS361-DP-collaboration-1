@@ -16,6 +16,7 @@ using System.Windows.Resources;
 using System.Windows.Shapes;
 using ComputerStoreCore;
 using CSCVoid = ComputerStoreCore.Void;
+using Microsoft.Win32;
 
 namespace Shop
 {
@@ -155,7 +156,15 @@ namespace Shop
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            //todo
+            string path = "";
+            OpenFileDialog myDialog = new OpenFileDialog();
+            myDialog.Filter = "Text (*.TXT)|*.TXT" + "|All files (*.*)|*.* ";
+            myDialog.CheckFileExists = true;
+            myDialog.Multiselect = false;
+            if (myDialog.ShowDialog() == true)
+            {
+                path = myDialog.FileName;
+            }
         }
 
         private void log_in_Click(object sender, RoutedEventArgs e)
