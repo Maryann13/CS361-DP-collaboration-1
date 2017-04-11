@@ -165,6 +165,22 @@ namespace Shop
             {
                 path = myDialog.FileName;
             }
+            if (path != "")
+            {
+                test_interpreter(path);
+            }
+            else
+            {
+                console_print("Bad test!");
+            }
+        }
+
+        private void test_interpreter(string path)
+        {
+            List<string> names =
+                    new List<string>(File.ReadAllLines(path));
+
+
         }
 
         private void log_in_Click(object sender, RoutedEventArgs e)
