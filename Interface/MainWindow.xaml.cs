@@ -47,6 +47,7 @@ namespace Shop
             var brush = new ImageBrush();
             brush.ImageSource = temp;
             shopingcart.Background = brush;
+            scviewer.ScrollToBottom();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
