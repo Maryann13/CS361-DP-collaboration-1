@@ -22,11 +22,11 @@ namespace ComputerStoreCore
         protected ReadOnlyBasket()
         {
             goods = new List<GoodInfo>();
-        }
+        }        
 
         protected ReadOnlyBasket(IEnumerable<GoodInfo> goods)
         {
-            goods = new List<GoodInfo>(goods);
+            this.goods = new List<GoodInfo>(goods);
         }
 
         protected static ReadOnlyBasket MakeReadOnlyBasket
@@ -46,9 +46,14 @@ namespace ComputerStoreCore
             goods.Add(good);
         }
 
+        public void Clear()
+        {
+            goods.Clear();
+        }
+
         public ReadOnlyBasket ToReadOnly()
         {
-            return ReadOnlyBasket.MakeReadOnlyBasket(goods);
+            return MakeReadOnlyBasket(goods);
         }
 
         protected Basket() : base() { }
@@ -58,6 +63,12 @@ namespace ComputerStoreCore
             if (instance == null)
                 instance = new Basket();
             return instance;
+        }
+
+        public void Uninstance()
+        {
+            instance = null;
+            goods = null;
         }
     }
 
@@ -106,7 +117,7 @@ namespace ComputerStoreCore
         {
             instance = null;
 
-            basket = null;
+            basket.Uninstance();
             name = null;
             username = null;
         }

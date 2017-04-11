@@ -26,7 +26,7 @@ namespace Shop
     {
         private bool in_log = false;
 
-        private string curr_comand;
+        private string curr_command;
   
         private string users_file = "./users.txt";
 
@@ -61,6 +61,8 @@ namespace Shop
 
             store = storeSystem.CreateStore
                     (storeBuilder, sFactory, dcFactory, cFactory);
+
+            store.Goods = goods_parse();
         }
 
         private Dictionary<string, int> goods_parse()
@@ -138,9 +140,15 @@ namespace Shop
                 interpreter.Text += Environment.NewLine + s;
         }
 
+        private void console_print(Basket basket)
+        {
+            for (int i = 0; i < basket.Count; ++i)
+                interpreter.Text += Environment.NewLine + basket[i].Item1;
+        }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
+            store.OnQuit(customer, out voidOut);
             Application.Current.Shutdown();
         }
 
@@ -151,7 +159,7 @@ namespace Shop
 
         private void log_in_Click(object sender, RoutedEventArgs e)
         {
-            curr_comand = "log_in";
+            curr_command = "log_in";
             nick.IsEnabled = true;
             pass.IsEnabled = true;
             nick.Clear();
@@ -166,7 +174,7 @@ namespace Shop
             string curr_nick = nick.Text;
             string curr_pass = pass.Password;
             string curr_name = "";
-            if (curr_comand == "register")
+            if (curr_command == "register")
             {
                 curr_name = name.Text;
                 add_user(curr_name, curr_nick, curr_pass);
@@ -196,15 +204,19 @@ namespace Shop
                 log_out.IsEnabled = true;
                 console_print("Hi, " + curr_name);
                 name.Text = curr_name;
-                goods.ItemsSource = new List<string>(goods_parse().Keys);
-                //todo
+                goods.ItemsSource = new List<string>(File.ReadAllLines(goods_file));
+
+                if (curr_command == "log_in")
+                    store.OnAuthorization(Tuple.Create(curr_name, curr_nick), out customer);
+                else
+                    store.OnRegistration(Tuple.Create(curr_name, curr_nick), out customer);
             }
             else
             {
                 name.Text = "Name";
                 nick.Clear();
                 pass.Clear();
-                console_print("Try Agane!");
+                console_print("Try Again!");
             }
         }
 
@@ -217,7 +229,7 @@ namespace Shop
 
         private void register_Click(object sender, RoutedEventArgs e)
         {
-            curr_comand = "register";
+            curr_command = "register";
             name.IsEnabled = true;
             nick.IsEnabled = true;
             pass.IsEnabled = true;
@@ -226,20 +238,23 @@ namespace Shop
             pass.Clear();
             ok.IsEnabled = true;
             clear.IsEnabled = true;
-            //todo
         }
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
-            if(goods.SelectedItem != null)
+            int ind = goods.SelectedIndex;
+            if (ind != -1)
             {
-                //todo
+                var pair = store.Goods.ElementAt(ind);
+                store.OnAddToBasket(Tuple.Create(Tuple.Create(pair.Key, pair.Value),
+                            customer.GoodsBasket), out voidOut);
             }
         }
 
         private void buy_Click(object sender, RoutedEventArgs e)
         {
-            //todo
+            store.OnPurchase(customer.GoodsBasketReadOnly, out voidOut);
+            customer.GoodsBasket.Clear();
         }
 
         private void log_out_Click(object sender, RoutedEventArgs e)
@@ -266,11 +281,7 @@ namespace Shop
 
         private void shopingcart_Click(object sender, RoutedEventArgs e)
         {
-            List<string> basket = new List<string>();
-            basket.Add("lol");
-            basket.Add("kek");
-            basket.Add("azaza");
-            console_print(basket);
+            console_print(customer.GoodsBasket);
         }
     }
 }
