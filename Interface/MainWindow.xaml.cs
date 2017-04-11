@@ -177,8 +177,43 @@ namespace Shop
 
         private void test_interpreter(string path)
         {
-            List<string> names =
-                    new List<string>(File.ReadAllLines(path));
+            /*log_in_Click(null, null);
+            nick.Text = "ABS_Lord";
+            pass.Password = "123456";
+            ok_Click(null, null);
+            goods.SelectedIndex = new Random().Next(0, goods.Items.Count);
+            add_Click(null, null);
+            goods.SelectedIndex = new Random().Next(0, goods.Items.Count);
+            add_Click(null, null);
+            goods.SelectedIndex = new Random().Next(0, goods.Items.Count);
+            add_Click(null, null);
+            buy_Click(null, null);
+            log_out_Click(null, null);*/
+            List<List<string>> commands =
+                    new List<List<string>>(File.ReadAllLines(path).Select((s) => s.Split(' ').ToList()));
+            foreach(var command in commands)
+            {
+                switch(command[0])
+                {
+                    case "log_in":
+                        log_in_Click(null, null);
+                        nick.Text = command[1];
+                        pass.Password = command[2];
+                        ok_Click(null, null);
+                        break;
+                    case "add":
+                        goods.SelectedIndex = new Random().Next(0, goods.Items.Count);
+                        add_Click(null, null);
+                        break;
+                    case "buy":
+                        buy_Click(null, null);
+                        break;
+                    case "log_out":
+                        log_out_Click(null, null);
+                        break;
+
+                }
+            }
 
 
         }

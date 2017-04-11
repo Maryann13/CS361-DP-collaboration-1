@@ -1,0 +1,5 @@
+log_in aaa aaa
+add
+add
+buy
+log_out

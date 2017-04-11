@@ -1,0 +1,7 @@
+log_in ABS_Lord 123456
+add
+add
+add
+add
+buy
+log_out
