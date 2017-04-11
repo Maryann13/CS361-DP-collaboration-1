@@ -39,6 +39,8 @@ namespace Shop
 
         private CSCVoid voidOut;
 
+        private Random r = new Random();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -197,7 +199,7 @@ namespace Shop
                         }
                         else
                         {
-                            goods.SelectedIndex = new Random().Next(0, goods.Items.Count);
+                            goods.SelectedIndex = r.Next(0, goods.Items.Count);
                             add_Click(null, null);
                         }
                         break;
@@ -227,7 +229,11 @@ namespace Shop
                 }
             }
 
-
+            name.IsEnabled = false;
+            nick.IsEnabled = false;
+            pass.IsEnabled = false;
+            ok.IsEnabled = false;
+            clear.IsEnabled = false;
         }
 
         private void log_in_Click(object sender, RoutedEventArgs e)
@@ -278,6 +284,7 @@ namespace Shop
                 add.IsEnabled = true;
                 buy.IsEnabled = true;
                 log_out.IsEnabled = true;
+                shopingcart.IsEnabled = true;
                 console_print("Hi, " + curr_name);
                 name.Text = curr_name;
                 goods.ItemsSource = new List<string>(File.ReadAllLines(goods_file));
@@ -328,19 +335,20 @@ namespace Shop
                 var pair = store.Goods.ElementAt(ind);
                 store.OnAddToBasket(Tuple.Create(Tuple.Create(pair.Key, pair.Value),
                             customer.GoodsBasket), out voidOut);
-                console_print(goods.Items[ind] + "Added!");
+                console_print(goods.Items[ind] + " Added!");
             }
         }
 
         private void buy_Click(object sender, RoutedEventArgs e)
         {
+            shopingcart.IsEnabled = false;
             store.OnPurchase(customer.GoodsBasketReadOnly, out voidOut);
             int summ = 0;
             for (var i = 0;  i < customer.GoodsBasketReadOnly.Count; i++)
             {
-                summ += customer.GoodsBasketReadOnly[0].Item2;
+                summ += customer.GoodsBasketReadOnly[i].Item2;
             }
-            console_print("Purchase for" + summ + "rubles is committed");
+            console_print("Purchase for " + summ + " rubles is committed!");
             customer.GoodsBasket.Clear();
         }
 
@@ -362,13 +370,34 @@ namespace Shop
             log_in.IsEnabled = true;
             add.IsEnabled = false;
             buy.IsEnabled = false;
+            shopingcart.IsEnabled = false;
             log_out.IsEnabled = false;
+            update_user(customer.Username, store.CurrentAccumulation);
             store.OnLogOut(customer, out voidOut);
         }        
 
         private void shopingcart_Click(object sender, RoutedEventArgs e)
         {
-            console_print(customer.GoodsBasket);
+            if(customer.GoodsBasket.Count != 0)
+                console_print(customer.GoodsBasket);
+        }
+
+        private void update_user(string nick, int acc)
+        { 
+            var f = File.ReadAllLines(users_file);
+            for (var i = 0; i < f.Length; i++) 
+            {
+                if(f[i].Split(' ')[1] == nick)
+                {
+                    f[i] = f[i].Split(' ')[0] + " " + f[i].Split(' ')[1] + " " + f[i].Split(' ')[2] + " " + (int.Parse(f[i].Split(' ')[3]) + store.CurrentAccumulation).ToString();
+                }
+            }
+            File.WriteAllLines(users_file, f);
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            
         }
     }
 }
