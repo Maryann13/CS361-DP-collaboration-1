@@ -36,8 +36,8 @@
         </Grid>
 
         <StackPanel x:Name="center" Grid.Row="1" Grid.Column ="1">
-            <ScrollViewer>
-                <TextBlock x:Name="interpreter" Height="280"  Text="Welcome to shop!" Background="White" FontStyle="Italic" FontSize="15" Foreground="Black"/>
+            <ScrollViewer x:Name="scviewer" VerticalScrollBarVisibility="Auto" Height="280">
+                <TextBlock x:Name="interpreter" Text="Welcome to shop!" Background="White" FontStyle="Italic" FontSize="15" Foreground="Black"/>
             </ScrollViewer>
             <TextBox x:Name="name" Margin="5" IsEnabled="False" Text="Name"></TextBox>
             <TextBox x:Name="nick" Margin="5" IsEnabled="False" Text="Nickname"></TextBox>

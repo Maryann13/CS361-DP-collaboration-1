@@ -13,3 +13,18 @@ C:\Users\Anne\Documents\Visual Studio 2015\Projects\ComputerStoreCore\ComputerSt
 C:\Users\Anne\Documents\Visual Studio 2015\Projects\ComputerStoreCore\ComputerStore\CS361-DP-collaboration-1\Interface\obj\Debug\ComputerStoreInterface.csproj.GenerateResource.Cache
 C:\Users\Anne\Documents\Visual Studio 2015\Projects\ComputerStoreCore\ComputerStore\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.exe
 C:\Users\Anne\Documents\Visual Studio 2015\Projects\ComputerStoreCore\ComputerStore\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.pdb
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\bin\Debug\Shop.exe.config
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.exe
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.pdb
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\bin\Debug\Shop.exe
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\bin\Debug\Shop.pdb
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\bin\Debug\ComputerStoreCore.dll
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\obj\Debug\ComputerStoreInterface.csprojResolveAssemblyReference.cache
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\obj\Debug\MainWindow.g.cs
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\obj\Debug\App.g.cs
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop_MarkupCompile.cache
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop_MarkupCompile.lref
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\obj\Debug\MainWindow.baml
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.g.resources
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\obj\Debug\Shop.Properties.Resources.resources
+C:\Programming\C#\patterns\CS361-DP-collaboration-1\Interface\obj\Debug\ComputerStoreInterface.csproj.GenerateResource.Cache

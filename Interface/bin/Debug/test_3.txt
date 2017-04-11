@@ -1,0 +1,11 @@
+register Donald RealTrump 666
+add
+add
+add
+buy
+logout
+log_in RealTrump 666
+add
+add
+buy
+log_out
