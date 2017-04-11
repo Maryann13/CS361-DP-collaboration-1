@@ -177,18 +177,6 @@ namespace Shop
 
         private void test_interpreter(string path)
         {
-            /*log_in_Click(null, null);
-            nick.Text = "ABS_Lord";
-            pass.Password = "123456";
-            ok_Click(null, null);
-            goods.SelectedIndex = new Random().Next(0, goods.Items.Count);
-            add_Click(null, null);
-            goods.SelectedIndex = new Random().Next(0, goods.Items.Count);
-            add_Click(null, null);
-            goods.SelectedIndex = new Random().Next(0, goods.Items.Count);
-            add_Click(null, null);
-            buy_Click(null, null);
-            log_out_Click(null, null);*/
             List<List<string>> commands =
                     new List<List<string>>(File.ReadAllLines(path).Select((s) => s.Split(' ').ToList()));
             foreach(var command in commands)
@@ -201,15 +189,39 @@ namespace Shop
                         pass.Password = command[2];
                         ok_Click(null, null);
                         break;
+
                     case "add":
-                        goods.SelectedIndex = new Random().Next(0, goods.Items.Count);
-                        add_Click(null, null);
+                        if (!in_log)
+                        {
+                            console_print("Not in log!");
+                        }
+                        else
+                        {
+                            goods.SelectedIndex = new Random().Next(0, goods.Items.Count);
+                            add_Click(null, null);
+                        }
                         break;
+
                     case "buy":
-                        buy_Click(null, null);
+                        if (!in_log)
+                        {
+                            console_print("Not in log!");
+                        }
+                        else
+                        {
+                            buy_Click(null, null);
+                        }
                         break;
+
                     case "log_out":
-                        log_out_Click(null, null);
+                        if (!in_log)
+                        {
+                            console_print("Not in log!");
+                        }
+                        else
+                        {
+                            log_out_Click(null, null);
+                        }
                         break;
 
                 }
@@ -235,15 +247,18 @@ namespace Shop
             string curr_nick = nick.Text;
             string curr_pass = pass.Password;
             string curr_name = "";
+            var users = users_parce();
             if (curr_command == "register")
             {
-                curr_name = name.Text;
-                add_user(curr_name, curr_nick, curr_pass);
-                in_log = true;
+                if (!users.ContainsKey(curr_nick))
+                {
+                    curr_name = name.Text;
+                    add_user(curr_name, curr_nick, curr_pass);
+                    in_log = true;
+                }
             }
             else
             {
-                var users = users_parce();
                 if (users.ContainsKey(curr_nick))
                     if (users[curr_nick].Item2 == curr_pass)
                     {
@@ -275,6 +290,10 @@ namespace Shop
             else
             {
                 name.Text = "Name";
+                if (curr_command == "register")
+                {
+                    name.Clear();
+                }
                 nick.Clear();
                 pass.Clear();
                 console_print("Try Again!");
@@ -309,19 +328,27 @@ namespace Shop
                 var pair = store.Goods.ElementAt(ind);
                 store.OnAddToBasket(Tuple.Create(Tuple.Create(pair.Key, pair.Value),
                             customer.GoodsBasket), out voidOut);
+                console_print(goods.Items[ind] + "Added!");
             }
         }
 
         private void buy_Click(object sender, RoutedEventArgs e)
         {
             store.OnPurchase(customer.GoodsBasketReadOnly, out voidOut);
+            int summ = 0;
+            for (var i = 0;  i < customer.GoodsBasketReadOnly.Count; i++)
+            {
+                summ += customer.GoodsBasketReadOnly[0].Item2;
+            }
+            console_print("Purchase for" + summ + "rubles is committed");
             customer.GoodsBasket.Clear();
         }
 
         private void log_out_Click(object sender, RoutedEventArgs e)
         {
             in_log = false;
-            interpreter.Text = "Welcome to shop!";
+            console_print("Log out!");
+            console_print("Welcome to shop!");
             name.Text = "Name";
             nick.Text = "Nickname";
             pass.Clear();
@@ -336,7 +363,6 @@ namespace Shop
             add.IsEnabled = false;
             buy.IsEnabled = false;
             log_out.IsEnabled = false;
-
             store.OnLogOut(customer, out voidOut);
         }        
 
